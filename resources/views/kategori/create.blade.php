@@ -18,9 +18,7 @@
                     <div class="form-group">
                         <label for="kodeKategori">Kode Kategori</label>
 
-                        <input id="kodeKategori"
-                            type="text" 
-                            name="kodeKategori" 
+                        <input id="kodeKategori" type="text" name="kodeKategori"
                             class="@error('kodeKategori') is-invalid @enderror">
                         @error('kodeKategori')
                             <div class="alert alert-danger">{{ $message }}</div>

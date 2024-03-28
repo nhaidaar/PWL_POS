@@ -1,6 +1,6 @@
 <body>
     <h1>Form Ubah Data User</h1>
-    <a href="{{route('/user')}}">Kembali</a>
+    <a href="{{ route('/user') }}">Kembali</a>
     <br>
     <form action="{{ route('/user/ubah_simpan', $data->user_id) }}" method="post">
         {{ csrf_field() }}

@@ -1,6 +1,6 @@
 @extends('m_user.template')
 @section('content')
-    <div class="row mt-5 mb-5">
+    <div class="row mb-5 mt-5">
         <div class="col-lg-12 margin-tb">
             <div class="float-left">
                 <h2>Show User</h2>
