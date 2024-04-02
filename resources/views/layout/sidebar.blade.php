@@ -678,8 +678,7 @@
     <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <li class="nav-item">
-                <a href="{{ url('/') }}"
-                    class="nav-link {{ $activeMenu == 'dashboard' ? 'active' : '' }}">
+                <a href="{{ url('/') }}" class="nav-link {{ $activeMenu == 'dashboard' ? 'active' : '' }}">
                     <i class="nav-icon fas fa-tachometer-alt"></i>
                     <p>Dashboard</p>
                 </a>
@@ -699,8 +698,7 @@
             </li>
             <li class="nav-header">Data Barang</li>
             <li class="nav-item">
-                <a href="{{ url('/kategori') }}"
-                    class="nav-link {{ $activeMenu == 'kategori' ? 'active' : '' }}">
+                <a href="{{ url('/kategori') }}" class="nav-link {{ $activeMenu == 'kategori' ? 'active' : '' }}">
                     <i class="nav-icon far fa-bookmark"></i>
                     <p>Kategori Barang</p>
                 </a>
@@ -719,8 +717,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ url('/barang') }}"
-                    class="nav-link {{ $activeMenu == 'penjualan' ? 'active' : '' }}">
+                <a href="{{ url('/penjualan') }}" class="nav-link {{ $activeMenu == 'penjualan' ? 'active' : '' }}">
                     <i class="nav-icon fas fa-cash-register"></i>
                     <p>Transaksi Penjualan</p>
                 </a>
@@ -728,3 +725,4 @@
         </ul>
     </nav>
 </div>
+
