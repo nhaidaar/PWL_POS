@@ -47,7 +47,8 @@ class LevelController extends Controller
         return DataTables::of($levels)
             ->addIndexColumn()
             ->addColumn('aksi', function ($level) {
-                $btn = '<a href="' . url('/level/' . $level->level_id . '/edit') . '" class="btn btn-warning btn-sm">Edit</a> ';
+                $btn = '<a href="' . url('/level/' . $level->level_id) . '" class="btn btn-info btn-sm">Detail</a> ';
+                $btn .= '<a href="' . url('/level/' . $level->level_id . '/edit') . '" class="btn btn-warning btn-sm">Edit</a> ';
                 $btn .= '<form class="d-inline-block" method="POST" action="' . url('/level/' . $level->level_id) . '">'
                     . csrf_field() . method_field('DELETE') .
                     '<button type="submit" class="btn btn-danger btn-sm" onclick="return confirm(\'Apakah Anda yakit menghapus data ini?\');">Hapus</button></form>';
@@ -71,6 +72,24 @@ class LevelController extends Controller
         $activeMenu = 'level';
 
         return view('level.create', ['breadcrumb' => $breadcrumb, 'page' => $page, 'activeMenu' => $activeMenu]);
+    }
+
+    public function show(string $id)
+    {
+        $level = LevelModel::find($id);
+
+        $breadcrumb = (object) [
+            'title' => 'Daftar Level',
+            'list' => ['Home', 'Level', 'Detail']
+        ];
+
+        $page = (object) [
+            'title' => 'Detail level'
+        ];
+
+        $activeMenu = 'level';
+
+        return view('level.show', ['breadcrumb' => $breadcrumb, 'page' => $page, 'level' => $level, 'activeMenu' => $activeMenu]);
     }
 
     public function store(Request $request)

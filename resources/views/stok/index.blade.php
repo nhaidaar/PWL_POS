@@ -4,6 +4,9 @@
     <div class="card card-outline card-primary">
         <div class="card-header">
             <h3 class="card-title">{{ $page->title }}</h3>
+            <div class="card-tools">
+                <a class="btn btn-sm btn-primary mt-1" href="{{ url('stok/create') }}">Tambah</a>
+            </div>
         </div>
         <div class="card-body">
             @if (session('success'))
@@ -69,7 +72,7 @@
                     {
                         data: "barang.barang_nama",
                         className: "",
-                        orderable: true,
+                        orderable: false,
                         searchable: true,
                     },
                     {

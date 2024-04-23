@@ -103,7 +103,8 @@ class KategoriController extends Controller
         return DataTables::of($kategoris)
             ->addIndexColumn()
             ->addColumn('aksi', function ($kategori) {
-                $btn = '<a href="' . url('/kategori/' . $kategori->kategori_id . '/edit') . '" class="btn btn-warning btn-sm">Edit</a> ';
+                $btn = '<a href="' . url('/kategori/' . $kategori->kategori_id) . '" class="btn btn-info btn-sm">Detail</a> ';
+                $btn .= '<a href="' . url('/kategori/' . $kategori->kategori_id . '/edit') . '" class="btn btn-warning btn-sm">Edit</a> ';
                 $btn .= '<form class="d-inline-block" method="POST" action="' . url('/kategori/' . $kategori->kategori_id) . '">'
                     . csrf_field() . method_field('DELETE') .
                     '<button type="submit" class="btn btn-danger btn-sm" onclick="return confirm(\'Apakah Anda yakit menghapus data ini?\');">Hapus</button></form>';
@@ -162,10 +163,28 @@ class KategoriController extends Controller
         return view('kategori.edit', ['breadcrumb' => $breadcrumb, 'page' => $page, 'kategori' => $kategori, 'activeMenu' => $activeMenu]);
     }
 
+    public function show(string $id)
+    {
+        $kategori = KategoriModel::find($id);
+
+        $breadcrumb = (object) [
+            'title' => 'Daftar Kategori',
+            'list' => ['Home', 'Kategori', 'Detail']
+        ];
+
+        $page = (object) [
+            'title' => 'Detail kategori'
+        ];
+
+        $activeMenu = 'kategori';
+
+        return view('kategori.show', ['breadcrumb' => $breadcrumb, 'page' => $page, 'kategori' => $kategori, 'activeMenu' => $activeMenu]);
+    }
+
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'kode' => 'required|string|min:3|max:10|unique:m_kategori,kategori_kode',
+            'kode' => 'required|string|min:3|max:10',
             'nama' => 'required|string|max:100',
         ]);
 

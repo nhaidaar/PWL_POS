@@ -35,6 +35,7 @@
                     </tr>
                 </table>
             @endempty
+            <br>
             <a href="{{ url('stok') }}" class="btn btn-sm btn-default mt- 2">Kembali</a>
         </div>
     </div>
