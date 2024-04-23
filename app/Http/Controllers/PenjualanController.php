@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\BarangModel;
+use App\Models\PenjualanDetailModel;
 use App\Models\PenjualanModel;
+use App\Models\StokModel;
 use App\Models\UserModel;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
@@ -73,6 +75,47 @@ class PenjualanController extends Controller
         $activeMenu = 'penjualan';
 
         return view('penjualan.create', ['breadcrumb' => $breadcrumb, 'page' => $page, 'user' => $user, 'barang' => $barang, 'activeMenu' => $activeMenu]);
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'penjualan_kode' => 'required|string|min:5|unique:t_penjualan,penjualan_kode',
+            'pembeli' => 'required|string|max:100',
+            'barang_id' => 'required|array',
+            'harga' => 'required|array',
+            'jumlah' => 'required|array',
+            'user_id' => 'required|integer'
+        ]);
+
+        // Simpan data penjualan
+        $transaksi = PenjualanModel::create([
+            'penjualan_tanggal' => now(),
+            'penjualan_kode' => $request->penjualan_kode,
+            'pembeli' => $request->pembeli,
+            'user_id' => $request->user_id,
+        ]);
+
+        // Simpan detail penjualan
+        foreach ($request->barang_id as $index => $barang_id) {
+            PenjualanDetailModel::create([
+                'penjualan_id' => $transaksi->penjualan_id,
+                'barang_id' => $barang_id,
+                'harga' => $request->harga[$index],
+                'jumlah' => $request->jumlah[$index],
+            ]);
+
+            // // Ambil jumlah stok barang yang tersedia
+            // $stok = StokModel::where('barang_id', $barang_id)->first();
+
+            // // Kurangi jumlah yang dibeli dari jumlah stok yang tersedia
+            // $stok->stok_jumlah -= $request->jumlah[$index];
+
+            // // Simpan kembali jumlah stok yang telah diupdate
+            // $stok->save();
+        }
+
+        return redirect('/transaksi')->with('success', 'Data transaksi berhasil disimpan');
     }
 
     /**
