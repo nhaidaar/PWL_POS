@@ -128,6 +128,9 @@ Route::group(['prefix' => 'penjualan'], function () {
     Route::get('/', [PenjualanController::class, 'index']);
     Route::post('/list', [PenjualanController::class, 'list']);
 
+    Route::get('/create', [PenjualanController::class, 'create']);
+    Route::post('/', [PenjualanController::class, 'store']);
+
     Route::get('/{id}', [PenjualanController::class, 'show']);
 
     Route::delete('/{id}', [PenjualanController::class, 'destroy']);

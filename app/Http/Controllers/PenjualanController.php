@@ -45,7 +45,6 @@ class PenjualanController extends Controller
             ->addIndexColumn()
             ->addColumn('aksi', function ($penjualan) {
                 $btn = '<a href="' . url('/penjualan/' . $penjualan->penjualan_id) . '" class="btn btn-info btn-sm">Detail</a> ';
-                $btn .= '<a href="' . url('/penjualan/' . $penjualan->penjualan_id . '/edit') . '" class="btn btn-warning btn-sm">Edit</a> ';
                 $btn .= '<form class="d-inline-block" method="POST" action="' . url('/penjualan/' . $penjualan->penjualan_id) . '">'
                     . csrf_field() . method_field('DELETE') .
                     '<button type="submit" class="btn btn-danger btn-sm" onclick="return confirm(\'Apakah Anda yakin menghapus data ini?\');">Hapus</button></form>';
@@ -53,6 +52,27 @@ class PenjualanController extends Controller
             })
             ->rawColumns(['aksi'])
             ->make(true);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        $breadcrumb = (object) [
+            'title' => 'Tambah Transaksi',
+            'list' => ['Home', 'Transaksi', 'Tambah']
+        ];
+
+        $page = (object) [
+            'title' => 'Tambah transaksi baru'
+        ];
+
+        $user = UserModel::all();
+        $barang = BarangModel::all();
+        $activeMenu = 'penjualan';
+
+        return view('penjualan.create', ['breadcrumb' => $breadcrumb, 'page' => $page, 'user' => $user, 'barang' => $barang, 'activeMenu' => $activeMenu]);
     }
 
     /**
