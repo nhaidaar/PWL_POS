@@ -7,7 +7,7 @@
             <div class="card-tools"></div>
         </div>
         <div class="card-body">
-            <form method="POST" action="{{ url('transaksi') }}" class="form-horizontal">
+            <form method="POST" action="{{ url('penjualan') }}" class="form-horizontal">
                 @csrf
 
                 {{-- <div class="form-group row">
@@ -90,7 +90,7 @@
                                 @enderror
                             </td>
                             <td>
-                                <input type="number" class="harga" name="harga[]" id="">
+                                <input type="number" class="harga" name="harga[]" id="" readonly>
                             </td>
                             <td>
                                 <input type="number" class="form-control jumlah" id="jumlah" name="jumlah[]" required>
@@ -99,7 +99,7 @@
                                 @enderror
                             </td>
                             <td>
-                                <input type="number" class="total" name="total[]">
+                                <input type="number" class="total" name="total[]" readonly>
                             </td>
                         </tr>
 
