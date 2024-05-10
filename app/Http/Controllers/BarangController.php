@@ -83,8 +83,17 @@ class BarangController extends Controller
             'nama' => 'required|string|max:100',
             'kategori_id' => 'required|integer',
             'harga_beli' => 'required|integer',
-            'harga_jual' => 'required|integer'
+            'harga_jual' => 'required|integer',
+            'berkas' => 'required'
         ]);
+
+        // Get file extension
+        $extFile = $request->berkas->extension();
+        $nama = $request->kode . " - " . $request->nama . ".$extFile";
+        // Pindahkan gambar ke folder
+        $path = $request->berkas->move('gambar', $nama);
+        $path = str_replace("\\", "//", $path);
+        $pathBaru = asset('gambar/' . $nama);
 
         BarangModel::create([
             'barang_kode' => $request->kode,
@@ -92,6 +101,7 @@ class BarangController extends Controller
             'kategori_id' => $request->kategori_id,
             'harga_beli' => $request->harga_beli,
             'harga_jual' => $request->harga_jual,
+            'image' => $pathBaru,
         ]);
 
         return redirect('/barang')->with('success', 'Data barang berhasil disimpan');

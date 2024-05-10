@@ -37,6 +37,10 @@
                         <th>Harga Jual</th>
                         <td>{{ $barang->harga_jual }}</td>
                     </tr>
+                    <tr>
+                        <th>Gambar</th>
+                        <td><img src="{{ $barang->image }}" alt=""></td>
+                    </tr>
                 </table>
             @endempty
             <br>
